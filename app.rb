@@ -12,19 +12,24 @@ class App < Roda
       view('index', locals: { todos: $todos })
     end
 
+    r.get('test') do
+      r.turbo { render('test') }
+      r.html { view('test') }
+    end
+
     r.post do
       puts request.params
-      if request.params["todo"].empty?
+      if request.params['todo'].empty?
         todo = { id: Random.uuid, name: 'Second' }
         $todos << todo
       else
-        todo = { id: Random.uuid, name: request.params["todo"]}
+        todo = { id: Random.uuid, name: request.params['todo'] }
         $todos << todo
       end
 
       response.status = 301
 
-      r.turbo { render('todo_stream', locals: { todo: todo })}
+      r.turbo { render('todo_stream', locals: { todo: }) }
       r.html { view('index', locals: { todos: $todos }) }
     end
   end

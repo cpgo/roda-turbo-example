@@ -1,12 +1,15 @@
 <h1>Hi from view</h1>
 
 
-<turbo-frame id="todos">
+<turbo-frame id="todos" target="new">
   <% todos.each do |todo| %>
   <%= render('todo', locals: { todo: todo} ) %>
   <% end %>
+  <a href="/test">Test</a>
 </turbo-frame>
 
+<turbo-frame id="new">
+</turbo-frame>
 <form action="/" method="post">
   <input type="text" name="todo" id="todo_name">
   <button type="submit">Save</button>
